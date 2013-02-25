@@ -1,0 +1,78 @@
+/**************************
+* Application
+**************************/
+App = Em.Application.create();
+
+/**************************
+* Models
+**************************/
+App.repo = Em.Object.extend({
+ 
+});
+
+App.repoReadme = Em.Object.extend({
+ 
+});
+
+/**************************
+* Views
+**************************/
+App.SearchTextField = Em.TextField.extend({
+    insertNewline: function(){
+        App.reposController.loadrepos();
+    }
+});
+
+/**************************
+* Controllers
+**************************/
+App.reposController = Em.ArrayController.create({
+    content: [],
+    username: '',
+    loadrepos: function(username,name) {
+        var me = this;
+        var username = me.get("username");
+        if ( username ) {
+            var url = 'https://api.github.com/users/'+username+'/repos?client_Id=69af424226e15a6396dd&client_secret=683d05837403207f247939ab21668065352b65db'
+            // push username to recent user array
+            App.recentUsersController.addUser(username);
+            me.set('content', []);
+            $.getJSON(url,function(data){
+                me.set('content', []);
+                $(data).each(function(index,value){
+                    var repoArray = App.repo.create({
+                        name: value.name,
+                        created: value.created_at,
+                        repoUrl: value.clone_url,
+                        language: value.language,
+                        size: value.size,
+                        avatar: value.owner.avatar_url,
+                        owner: value.owner.login
+                    });
+                    me.pushObject(repoArray);
+                })
+            });
+        }
+    }
+});
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+App.recentUsersController = Em.ArrayController.create({
+    content: [],
+    addUser: function(name) {
+        if ( this.contains(name) ) this.removeObject(name);
+        this.pushObject(name);
+    },
+    removeUser: function(view){
+        this.removeObject(view.context);
+    },
+    searchAgain: function(view){
+        App.reposController.set('username', view.context);
+        App.reposController.loadrepos();
+    },
+    reverse: function(){
+        return this.toArray().reverse();
+    }.property('@each')
+});
+
