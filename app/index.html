@@ -21,6 +21,11 @@
                 transition: margin-top 1.5s; 
                 margin-top:-30px;
             }
+            .ribbonWrapper{
+                position:absolute;
+                top:-10px;
+                right:10px;
+            }
             .ribbon:hover{
                 margin-top:0;
             }
@@ -58,12 +63,10 @@
                 border-left:0;
                 margin:0;
                 margin-bottom:35px;
+                position:relative;
             }
             .blue{
                 color:#0088CC;
-            }
-            .avatar{
-                margin:15px;
             }
         </style>
     </head>
@@ -100,31 +103,48 @@
                             </ul>
                         </div>  
                     </div>
+                    <div class="row-fluid">
+                        <div id="userData" class="searched">
+                            <p style="padding:5px 10px; border-bottom:1px solid #ccc;" class="lead blue">User Bio</p>
+                            {{#each App.githubUserController}}
+                                <div class="row-fluid">
+                                    <div class="span8" style="padding-left:10px;">
+                                        <p><strong>Username:</strong> {{username}}</p>
+                                        <p><strong>Name:</strong> {{name}}</p>
+                                        <p><strong>Company:</strong> {{company}}</p>
+                                        <p><strong>Blog:</strong> {{blog}}</p>
+                                        <p><strong>Location:</strong> {{location}}</p>
+                                        <p><strong>Email:</strong> <a target="_blank"{{bindAttr href="email"}}>{{email}}</a></p>
+                                        <p><strong>Hireable:</strong> {{hireable}}</p>
+                                        <p><strong>Repos:</strong> {{repos}}</p>
+                                        <p><strong>Followers:</strong> {{followers}}</p>
+                                    </div>
+                                    <div class="span4" style="padding:5px 10px;">
+                                        <img class="avatar" {{bindAttr src="avatar"}} />
+                                    </div>
+                                </div> 
+                            {{/each}}   
+                        </div>
+                    </div>
                 </div>
                 <div class="span9">
                     <div class="row-fluid">
-                        <div id="results">
+                        <div id="results" class="">
+                            <p style="padding:5px 10px; border-bottom:1px solid #ccc;" class="lead blue">User Repositories</p>
                         {{#each App.reposController}}
                             <div class="row-fluid">
-                                <div class="repo">
-                                    <div class="span2 hidden-phone">
-                                        <img class="avatar" {{bindAttr src="avatar"}} />
-                                    </div>     
-                                    <div class="span8" id="repoDetails">
-                                    
+                                <div class="repo"> 
+                                    <div class="span12 repoDetails">
                                         <blockquote>
-                                        <img class="visible-phone pull-left avatar" {{bindAttr src="avatar"}} />
-                                            <h3 class="visible-phone blue" style="margin-bottom:0px;">{{name}} <a target="_blank" class="btn btn-info" {{bindAttr href="repoUrl"}}>Fork on Github</a>
-                                            </h3>
-                                            <h3 class="hidden-phone blue" style="margin-bottom:0px;"><a target="_blank" {{bindAttr href="repoUrl"}}>{{name}}</a></h3>
+                                            <h3 class="blue" style="margin-bottom:0px;"><a target="_blank" {{bindAttr href="repoUrl"}}>{{name}}</a></h3>
                                             <p><strong>Language:</strong> {{language}}</p>
                                             <p><strong>File Size:</strong> {{size}}kb</p>
                                             <p><strong>Readme:</strong> {{readmeContent}}</p>
-                                            <small>Created By {{owner}} on {{created}}</small>
-                                        </blockquote>
-                                    </div>
-                                    <div class="span2 pull-right hidden-phone" style="overflow:hidden;">
+                                            <small>Created on {{created}}</small>
+                                        <div class="ribbonWrapper" style="overflow:hidden;">
                                          <a target="_blank" {{bindAttr href="repoUrl"}}><img class="ribbon" src="/images/fork.png" alt="Fork me on GitHub"></a>
+                                        </div>
+                                        </blockquote>
                                     </div>
                                 </div>
                             </div>   

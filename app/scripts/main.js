@@ -10,7 +10,7 @@ App.repo = Em.Object.extend({
  
 });
 
-App.repoReadme = Em.Object.extend({
+App.githubUser = Em.Object.extend({
  
 });
 
@@ -30,6 +30,7 @@ App.reposController = Em.ArrayController.create({
     content: [],
     username: '',
     loadrepos: function(username,name) {
+        App.githubUserController.loadUser(username);
         var me = this;
         var username = me.get("username");
         if ( username ) {
@@ -57,12 +58,55 @@ App.reposController = Em.ArrayController.create({
 });
 
 
+
+
+
+App.githubUserController = Em.ArrayController.create({
+    content: [],
+    loadUser: function(username,name) {
+        var me = this;
+        if ( username ) {
+            var url = 'https://api.github.com/users/'+username+'?client_Id=69af424226e15a6396dd&client_secret=683d05837403207f247939ab21668065352b65db'
+            // push username to recent user array
+            me.set('content', []);
+            $.getJSON(url,function(data){
+                me.set('content', []);
+                $(data).each(function(index,value){
+                    var githubUserArray = App.githubUser.create({
+                        username: value.login,
+                        avatar: value.avatar_url,
+                        name: value.name,
+                        company: value.company,
+                        blog: value.blog,
+                        location: value.location,
+                        email: value.email,
+                        hireable: value.hireable,
+                        bio: value.bio,
+                        repos: value.public_repos,
+                        followers: value.followers
+                    });
+                    me.pushObject(githubUserArray);
+                })
+            });
+        }
+    }
+});
+
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////
 App.recentUsersController = Em.ArrayController.create({
     content: [],
     addUser: function(name) {
         if ( this.contains(name) ) this.removeObject(name);
         this.pushObject(name);
+
+        console.log(this.get('content').length);
+        if (this.get('content').length > 5){
+            this.get('content').splice(0,1);
+        };
     },
     removeUser: function(view){
         this.removeObject(view.context);
