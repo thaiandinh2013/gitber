@@ -66,7 +66,6 @@ App.repoReadmeController = Em.ArrayController.create({
     loadRepoReadme: function(username) {
         var repoName = 'gitber';
         var me = this;
-		console.log(username);
         if ( username ) {
             var url = 'https://api.github.com/repos/'+username+'/'+repoName+'/readme?client_id=69af424226e15a6396dd&client_secret=683d05837403207f247939ab21668065352b65db'
             // push username to recent user array
@@ -106,7 +105,8 @@ App.githubUserController = Em.ArrayController.create({
                         hireable: value.hireable,
                         bio: value.bio,
                         repos: value.public_repos,
-                        followers: value.followers
+                        followers: value.followers,
+                        joined: value.created_at
                     });
                     me.pushObject(githubUserArray);
                 })
@@ -116,7 +116,10 @@ App.githubUserController = Em.ArrayController.create({
 });
 
 
-
+ function formatJoinDate(joined) {
+        var joined = Date.parse(joined);
+        return joined.toString("d MMMM yyyy");
+    };
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
