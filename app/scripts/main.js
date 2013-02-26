@@ -52,7 +52,7 @@ App.reposController = Em.ArrayController.create({
                         size: value.size,
                         avatar: value.owner.avatar_url,
                         owner: value.owner.login,
-						readme: App.repoReadmeController.loadRepoReadme(username,name)
+						readme: App.repoReadmeController.loadRepoReadme(username)
                     });
                     me.pushObject(repoArray);
                 })
@@ -63,11 +63,12 @@ App.reposController = Em.ArrayController.create({
 });
 App.repoReadmeController = Em.ArrayController.create({
     content: [],
-    loadRepoReadme: function(username,name) {
+    loadRepoReadme: function(username) {
+        var repoName = 'gitber';
         var me = this;
 		console.log(username);
         if ( username ) {
-            var url = 'https://api.github.com/repos/deanreinhard/gitber/readme?client_id=69af424226e15a6396dd&client_secret=683d05837403207f247939ab21668065352b65db'
+            var url = 'https://api.github.com/repos/'+username+'/'+repoName+'/readme?client_id=69af424226e15a6396dd&client_secret=683d05837403207f247939ab21668065352b65db'
             // push username to recent user array
             me.set('content', []);
             $.getJSON(url,function(data){
