@@ -175,6 +175,9 @@
                 </div>
                 <div class="span8">
                     <div class="row-fluid">
+					{{#each App.repoReadmeController}}
+						{{readmeFile}}
+					{{/each}}
                         <div id="results" class="">
                             <p style="padding:5px 10px; border-bottom:1px solid #ccc;  margin-bottom:-1px;" class="lead blue">User Repositories</p>
                         {{#each App.reposController}}
@@ -185,7 +188,7 @@
                                             <h3 class="blue" style="margin-bottom:0px;"><a target="_blank" {{bindAttr href="repoUrl"}}>{{name}}</a></h3>
                                             <p><strong>Language:</strong> {{language}}</p>
                                             <p><strong>File Size:</strong> {{size}}kb</p>
-                                            <p><strong>Readme:</strong> {{readmeContent}}</p>
+                                            <p><strong>Readme:</strong> </p>
                                             <small>Created on {{created}}</small>
                                         <div class="ribbonWrapper" style="overflow:hidden;">
                                          <a target="_blank" {{bindAttr href="repoUrl"}}><img class="ribbon" src="images/fork.png" alt="Fork me on GitHub"></a>
@@ -209,7 +212,7 @@
         <!-- Add your site or application content here -->
 
         <!-- build:js scripts/scripts.js -->
-        
+        <script src="scripts/vendor/base64.js"></script>
         <script src="scripts/main.js"></script>
         <script src="scripts/vendor/bootstrap/bootstrap-transition.js"></script>
         <script src="scripts/vendor/bootstrap/bootstrap-alert.js"></script>

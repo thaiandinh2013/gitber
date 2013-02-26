@@ -10,6 +10,10 @@ App.repo = Em.Object.extend({
  
 });
 
+App.repoReadme = Em.Object.extend({
+ 
+});
+
 App.githubUser = Em.Object.extend({
  
 });
@@ -47,13 +51,34 @@ App.reposController = Em.ArrayController.create({
                         language: value.language,
                         size: value.size,
                         avatar: value.owner.avatar_url,
-                        owner: value.owner.login
+                        owner: value.owner.login,
+						readme: App.repoReadmeController.loadRepoReadme(username,name)
                     });
                     me.pushObject(repoArray);
                 })
             });
-			
         App.githubUserController.loadUser(username);
+        }
+    }
+});
+App.repoReadmeController = Em.ArrayController.create({
+    content: [],
+    loadRepoReadme: function(username,name) {
+        var me = this;
+		console.log(username);
+        if ( username ) {
+            var url = 'https://api.github.com/repos/deanreinhard/gitber/readme?client_id=69af424226e15a6396dd&client_secret=683d05837403207f247939ab21668065352b65db'
+            // push username to recent user array
+            me.set('content', []);
+            $.getJSON(url,function(data){
+                me.set('content', []);
+                $(data).each(function(index,value){
+                    var repoReadmeArray = App.githubUser.create({
+                        readmeFile: $.base64Decode(value.content)
+                    });
+                    me.pushObject(repoReadmeArray);
+                })
+            });
         }
     }
 });
