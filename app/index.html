@@ -141,17 +141,30 @@
             .phoneButtons{
                 padding:20px;
             }
-            .phone-button{
+            .phone-button a{
                width:100px;
-               height:50px;
-               background:green;
+               height:65px;
                float:left; 
+			   margin-right:15px;
+			   margin-bottom:15px;
             }
             .avatar{
                 position: absolute;
                 top: 50px;
                 right: 10px;
+				height:90px;
+				width:90px;
             }
+			#gitber1{color:#0088cc;}
+			#gitber2{font-size:50%;}
+			#gitber3{font-size:50%;}
+			#gitber4{color:#0088cc;}
+			#gitber5{font-size:50%;}
+			#gitber6{font-size:50%;}
+			#gitber7{color:#0088cc;}
+			#gitber8 i{color:#0099cc !important; text-shadow:6px 6px 15px rgba(0,0,0,0.3)}
+			#fitHeader{margin:0;}
+			.container{overflow:hidden;}
         </style>
     </head>
     <body>
@@ -161,7 +174,7 @@
     <div class="container">
 			
             <div class="row-fluid" style="text-align:center;">
-                <p class="gitber" id="fitHeader" data-0="visibility:visible;" data-top-bottom="visibility:hidden;">GitBer!</p>
+                <p class="gitber" id="fitHeader" data-0="visibility:visible;" data-top-bottom="visibility:hidden;"><span id="gitber1">G</span><span id="gitber2">i</span><span id="gitber3">t</span><span id="gitber4">B</span><span id="gitber5">e</span><span id="gitber6">r</span><span id="gitber7">!</span><span id="gitber8"><i class="icon-github"></i></span></p>
             </div>        
             <div class="row-fluid">
                 <div class="span4">
@@ -192,7 +205,7 @@
                              <script type="text/x-handlebars"> 
                             {{#each App.githubUserController}}
                                 <div class="row-fluid">
-                                    <div class="span8" style="padding-left:10px;">
+                                    <div class="span12" style="padding-left:10px;padding-right:100px;">
 										{{#if name}}<p><strong>Name:</strong> {{name}}</p>{{/if}}
                                         <p><strong>Username:</strong> {{username}}</p>
                                         {{#if company}}<p><strong>Company:</strong> {{company}}</p>{{/if}}
@@ -207,23 +220,23 @@
                                 <div class="row-fluid visible-phone phoneButtons">
                                     <div class="phone-button">
                                         {{#if email}}
-                                        
-                                            
-                                                <a class="btn btn-primary" href="mailto:{{unbound email}}"><i class="icon-envelope-alt icon-2x"></i></a>
-                                           
-                                       
-                                    {{/if}}   
+											<a class="btn btn-primary btn-large" href="mailto:{{unbound email}}"><i class="icon-envelope-alt icon-4x"></i></a>
+										{{/if}}   
                                     </div>
                                     <div class="phone-button">
-                                     {{#if blog}}
-                                        <a class="btn btn-warning"href="{{unbound blog}}" target="_blank"><i class="icon-comments icon-2x"></i></a>
-                                     {{/if}}   
+										 {{#if blog}}
+											<a class="btn btn-warning btn-large" href="{{unbound blog}}" target="_blank"><i class="icon-comments icon-4x"></i></a>
+										 {{/if}}   
                                     </div>
                                     <div class="phone-button">
-                                        
+                                        {{#if location}}
+											<a class="btn btn-danger btn-large" href="{{unbound location}}" target="_blank"><i class="icon-map-marker icon-4x"></i></a>
+										{{/if}}
                                     </div>
                                     <div class="phone-button">
-                                        
+										{{#if hireable}}
+												<a class="btn btn-inverse btn-large" href="{{unbound blog}}" target="_blank"><i class="icon-suitcase icon-4x"></i></a>
+										{{/if}}	
                                     </div>
                                 </div>
 								<div class="row-fluid hidden-phone" style="position:absolute; margin-top:10px;overflow:hidden;">
