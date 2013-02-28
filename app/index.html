@@ -275,10 +275,7 @@
                                             <h3 class="blue" style="margin-bottom:0px;"><a target="_blank" {{bindAttr href="repoUrl"}}>{{name}}</a></h3>
                                             <p><strong>Language:</strong> {{language}}</p>
                                             <p><strong>File Size:</strong> {{size}}kb</p>
-                                            <p style="max-width:80%;"><strong>Description:</strong> 
-                                                {{#each App.repoReadmeController}}
-                                                    {{readmeFile}}
-                                                {{/each}} 
+                                            <p style="max-width:80%;"><strong>Description:</strong> {{readme}}Readme should be here
                                             </p>
                                             <small>Created on {{created}}</small>
                                         <div class="ribbonWrapper" style="overflow:hidden;">

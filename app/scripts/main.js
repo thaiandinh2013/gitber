@@ -11,7 +11,7 @@ App.repo = Em.Object.extend({
 });
 
 App.repoReadme = Em.Object.extend({
- 
+
 });
 
 App.githubUser = Em.Object.extend({
@@ -26,7 +26,9 @@ App.SearchTextField = Em.TextField.extend({
         App.reposController.loadrepos();
     }
 });
-
+var client='69af424226e15a6396dd';
+var secret='683d05837403207f247939ab21668065352b65db';
+var oauth = '?client_id='+client+'&client_secret='+secret;
 /**************************
 * Controllers
 **************************/
@@ -37,7 +39,7 @@ App.reposController = Em.ArrayController.create({
         var me = this;
         var username = me.get("username");
         if ( username ) {
-            var url = 'https://api.github.com/users/'+username+'/repos?client_id=69af424226e15a6396dd&client_secret=683d05837403207f247939ab21668065352b65db'
+            var url = 'https://api.github.com/users/'+username+'/repos'+oauth;
             // push username to recent user array
             App.recentUsersController.addUser(username);
             me.set('content', []);
@@ -52,7 +54,7 @@ App.reposController = Em.ArrayController.create({
                         size: value.size,
                         avatar: value.owner.avatar_url,
                         owner: value.owner.login,
-						readme: App.repoReadmeController.loadRepoReadme(username)
+						readme: loadRepoReadme(username, value.name)
                     });
                     me.pushObject(repoArray);
                 })
@@ -61,34 +63,26 @@ App.reposController = Em.ArrayController.create({
         }
     }
 });
-App.repoReadmeController = Em.ArrayController.create({
-    content: [],
-    loadRepoReadme: function(username) {
-        var repoName = 'gitber';
-        var me = this;
-        if ( username ) {
-            var url = 'https://api.github.com/repos/'+username+'/'+repoName+'/readme?client_id=69af424226e15a6396dd&client_secret=683d05837403207f247939ab21668065352b65db'
-            // push username to recent user array
-            me.set('content', []);
+
+ var loadRepoReadme = function (username,repoName) {
+            var url = 'https://api.github.com/repos/'+username+'/'+repoName+'/readme'+oauth;
             $.getJSON(url,function(data){
-                me.set('content', []);
                 $(data).each(function(index,value){
-                    var repoReadmeArray = App.githubUser.create({
+                    var repoReadmeArray = ({
                         readmeFile: $.base64Decode(value.content)
                     });
-                    me.pushObject(repoReadmeArray);
+                    return loadRepoReadme;
                 })
             });
-        }
-    }
-});
+        };
+
 
 App.githubUserController = Em.ArrayController.create({
     content: [],
     loadUser: function(username,name) {
         var me = this;
         if ( username ) {
-            var url = 'https://api.github.com/users/'+username+'?client_id=69af424226e15a6396dd&client_secret=683d05837403207f247939ab21668065352b65db'
+            var url = 'https://api.github.com/users/'+username+''+oauth;
             // push username to recent user array
             me.set('content', []);
             $.getJSON(url,function(data){
