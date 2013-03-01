@@ -15,6 +15,7 @@
         <script src="scripts/vendor/jquery.min.js"></script>
         <script src="scripts/vendor/bootstrap/bootstrap.min.js"></script>
         <script src="scripts/vendor/async.js"></script>
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js' type='text/javascript'></script>
         <script src="http://cloud.github.com/downloads/emberjs/ember.js/ember-0.9.6.min.js"></script>
         <style>
             h1,h2,h3,h4,h5,h6,p{
@@ -46,6 +47,16 @@
                 padding-bottom:10px;
                 margin-bottom:20px;
             }
+			#results{
+				margin-right:10px;
+			}
+			#results pre{
+				margin-right:20px;
+				max-height:150px;
+				overflow-y:auto;
+				overflow-x:hidden;
+				margin-top:10px;
+			}
             .recentSearches li{
                 display:block;
                 clear:both;
@@ -165,6 +176,10 @@
 			#gitber8 i{color:#0099cc !important; text-shadow:6px 6px 15px rgba(0,0,0,0.3)}
 			#fitHeader{margin:0;}
 			.container{overflow:hidden;}
+			*::-webkit-scrollbar{width:10px;}
+			*::-webkit-scrollbar-track{background:#ccc; width:2px;}
+			*::-webkit-scrollbar-button{height:15px;border:3px solid #457e82;border-radius:8px;background:#FFF;}
+			*::-webkit-scrollbar-thumb{border-radius:10px;background:#457e82;}
         </style>
     </head>
     <body>
@@ -289,8 +304,13 @@
                                             <h3 class="blue" style="margin-bottom:0px;"><a target="_blank" {{bindAttr href="repoUrl"}}>{{name}}</a></h3>
                                             <p><strong>Language:</strong> {{language}}</p>
                                             <p><strong>File Size:</strong> {{size}}kb</p>
-                                            <p style="max-width:80%;"><strong>Description:</strong> {{readme}}
-                                            </p>
+                                            <p><strong>Description:</strong></p> 
+											<div class="row-fluid">
+												<div class="span10">
+													<pre>{{readme}}</pre>
+												</div>
+											</div>	
+                                            
                                             <small>Created on {{created}}</small>
                                         <div class="ribbonWrapper" style="overflow:hidden;">
                                          <a target="_blank" {{bindAttr href="repoUrl"}}><img class="ribbon" src="images/fork.png" alt="Fork me on GitHub"></a>
@@ -316,18 +336,17 @@
 
         <!-- build:js scripts/scripts.js -->
         <script src="scripts/vendor/base64.js"></script>
-        <script src="scripts/vendor/date.js"></script>
-		
         <script src="scripts/vendor/jquery.fittext.js"></script>
         <script src="scripts/main.js"></script>
         <script src="scripts/vendor/skrollr.min.js"></script>
         <script>
-        $("#fitHeader").fitText(0.7);
-	window.onload = function() {
-		skrollr.init({
-			forceHeight: false
+        
+		$(function() {
+		$("#fitHeader").fitText(0.7);
+			skrollr.init({
+				forceHeight: false
+			});
 		});
-	}
     </script>
         <!--script src="scripts/routes/app-router.js"></script>
         <script src="scripts/store.js"></script>

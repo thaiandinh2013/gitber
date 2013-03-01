@@ -57,7 +57,7 @@ App.reposController = Em.ArrayController.create({
 								repo.readmeFile = "No readme found";
 								callback(null, repo);
 						}
-					}, 1000);
+					}, 1200);
                   },
                   function(error, reposWithReadme){
                     $(reposWithReadme).each(function(index,value){
