@@ -65,7 +65,7 @@ App.reposController = Em.ArrayController.create({
 								repo.readmeFile = "No readme found";
 								callback(null, repo);
 						}
-					}, 1200);
+					}, 2200);
                   },
                   function(error, reposWithReadme){
                     $(reposWithReadme).each(function(index,value){
@@ -140,6 +140,10 @@ App.organisationUserController = Em.ArrayController.create({
                 })
             });
         }
+    },
+	searchOrgUser: function(view){
+        App.reposController.set('username', view.context.orgUsername);
+        App.reposController.loadrepos();
     }
 });
 
@@ -171,13 +175,5 @@ App.recentUsersController = Em.ArrayController.create({
     reverse: function(){
         return this.toArray().reverse();
     }.property('@each')
-});
-
-App.loadedOrganisationUsersController = Em.ArrayController.create({
-    content: [],
-    searchOrgUser: function(view){
-        App.reposController.set('username', 'deanreinhard');
-        App.reposController.loadrepos();
-    }
 });
 

@@ -228,12 +228,12 @@
                                 <button class="btn btn-info" {{action "loadOrganisation" target="App.organisationUserController"}}>Go!</button>
                                 </script>
                             </div>
-                            <p style="padding:5px 10px; border-bottom:1px solid #ccc;" class="lead blue">Recent Searches</p>
-                            <ul class="unstyled recentSearches table-striped"> 
+                            <p style="padding:5px 10px; border-bottom:1px solid #ccc;" class="lead blue">Organisation Members</p>
+                            <ul class="unstyled recentSearches table-striped" style="max-height:171px; overflow:auto;"> 
                                  <script type="text/x-handlebars"> 
                                  {{#each App.organisationUserController}}
                                     <li> 
-                                        <a href="#" title="view repos" {{action "searchOrgUser" target="App.loadedOrganisationUsersController"}}>{{orgUsername}}</a>
+                                        <a href="#" title="view repos" {{action "searchOrgUser" target="App.organisationUserController"}}>{{orgUsername}}</a>
                                     </li> 
                                 {{/each}} 
                                 </script>
