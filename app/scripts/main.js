@@ -10,10 +10,6 @@ App.repo = Em.Object.extend({
  
 });
 
-App.repoReadme = Em.Object.extend({
-
-});
-
 App.githubUser = Em.Object.extend({
  
 });
@@ -48,11 +44,20 @@ App.reposController = Em.ArrayController.create({
                 async.map(
                   data,
                   function(repo, callback){
+				  var success = false;
                     var url = 'https://api.github.com/repos/'+username+'/'+repo.name+'/readme'+oauth;
                     $.getJSON(url, function(readme){
-                      repo.readmeFile = $.base64Decode(readme.content);
+						success = true;
+						repo.readmeFile = $.base64Decode(readme.content);
                       callback(null, repo);
                     });
+					setTimeout(function() {
+						if (!success)
+						{
+								repo.readmeFile = "No readme found";
+								callback(null, repo);
+						}
+					}, 1000);
                   },
                   function(error, reposWithReadme){
                     $(reposWithReadme).each(function(index,value){
