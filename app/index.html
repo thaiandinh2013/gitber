@@ -15,7 +15,6 @@
         <script src="scripts/vendor/jquery.min.js"></script>
         <script src="scripts/vendor/bootstrap/bootstrap.min.js"></script>
         <script src="scripts/vendor/async.js"></script>
-		<script src='http://cdnjs.cloudflare.com/ajax/libs/prettify/188.0.0/prettify.js' type='text/javascript'></script>
         <script src="http://cloud.github.com/downloads/emberjs/ember.js/ember-0.9.6.min.js"></script>
         <style>
             h1,h2,h3,h4,h5,h6,p{
@@ -49,6 +48,7 @@
             }
 			#results{
 				margin-right:10px;
+				margin-bottom:60px;
 			}
 			#results pre{
 				margin-right:20px;
@@ -121,9 +121,13 @@
                 color:#0099cc;
             }
 			.gitber p{
-				font-size:2.5em;
+				font-size:2em;
 				text-shadow:2px 2px 2px rgba(0,0,0,0.4);
 				width:inherit;
+				margin:0 0 5px 0;
+			}
+			.footer{
+				box-shadow:-1px 0px 5px rgba(0,0,0,0.3);
 			}
 			#tagHeading{
 				padding:5px 0 0 0;
@@ -177,9 +181,10 @@
 			#fitHeader{margin:0;}
 			.container{overflow:hidden;}
 			*::-webkit-scrollbar{width:10px;}
-			*::-webkit-scrollbar-track{background:#ccc; width:2px;}
+			*::-webkit-scrollbar-track{background:#ccc;}
 			*::-webkit-scrollbar-button{height:15px;border:3px solid #457e82;border-radius:8px;background:#FFF;}
 			*::-webkit-scrollbar-thumb{border-radius:10px;background:#457e82;}
+			#userData{margin-bottom:150px;}
         </style>
     </head>
     <body>
@@ -279,7 +284,7 @@
 									{{#if hireable}}
 										<div class="span3">
 											<div class="ribbon hireTag" style="position:relative;">
-												<a href="{{unbound blog}}" target="_blank"><img src="images/small-fork.png"><span class="bioDropdown"><p class="lead" style="color:#fff;">Hire</p><i class="icon-suitcase icon-2x"></i></span></a>
+												<a href="{{unbound blog}}" target="_blank"><img src="images/small-fork.png"><span class="bioDropdown"><p class="lead"  style="color:#fff;">Hire</p><i class="icon-suitcase icon-2x"></i></span></a>
 											</div>
 										</div>
 									{{/if}}
@@ -327,7 +332,9 @@
              </script>
         </div>
     </div>
-    
+    <div class="footer gitber" style="position:fixed; bottom:0px; left:0px; background:#fff; height:40px; width:100%; text-align:center;">
+				<p>footer!</p>
+	</div>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
         <![endif]-->
