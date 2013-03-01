@@ -14,12 +14,21 @@ App.githubUser = Em.Object.extend({
  
 });
 
+App.orgMembers = Em.Object.extend({
+ 
+});
+
 /**************************
 * Views
 **************************/
 App.SearchTextField = Em.TextField.extend({
     insertNewline: function(){
         App.reposController.loadrepos();
+    }
+});
+App.OrganisationSearchTextField = Em.TextField.extend({
+    insertNewline: function(){
+        App.organisationUserController.loadOrganisation();
     }
 });
 var client='69af424226e15a6396dd';
@@ -36,7 +45,6 @@ App.reposController = Em.ArrayController.create({
         var username = me.get("username");
         if ( username ) {
             var url = 'https://api.github.com/users/'+username+'/repos'+oauth;
-            // push username to recent user array
             App.recentUsersController.addUser(username);
             me.set('content', []);
             $.getJSON(url,function(data){
@@ -108,9 +116,33 @@ App.githubUserController = Em.ArrayController.create({
                     me.pushObject(githubUserArray);
                 })
             });
+        }App.recentUsersController.addUser(username);
+    }
+});
+
+
+App.organisationUserController = Em.ArrayController.create({
+	organisation: '',
+    content: [],
+    loadOrganisation: function(organisation,name) {
+        var me = this;
+		var organisation = me.get("organisation");
+        if ( organisation ) {
+            var url = 'https://api.github.com/orgs/'+organisation+'/members'+oauth;
+            me.set('content', []);
+            $.getJSON(url,function(data){
+                me.set('content', []);
+                $(data).each(function(index,value){
+                    var organisationUserArray = App.githubUser.create({
+                        orgUsername: value.login
+                    });
+                    me.pushObject(organisationUserArray);
+                })
+            });
         }
     }
 });
+
 
 
  function formatJoinDate(joined) {
@@ -139,5 +171,13 @@ App.recentUsersController = Em.ArrayController.create({
     reverse: function(){
         return this.toArray().reverse();
     }.property('@each')
+});
+
+App.loadedOrganisationUsersController = Em.ArrayController.create({
+    content: [],
+    searchOrgUser: function(view){
+        App.reposController.set('username', 'deanreinhard');
+        App.reposController.loadrepos();
+    }
 });
 

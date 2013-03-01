@@ -188,13 +188,13 @@
         </style>
     </head>
     <body>
-	<div class="gitber container" id="tagHeading" style="position:fixed; text-align:center;" data-0="opacity:0;" data-anchor-target="#fitHeader" data-50-top-bottom="opacity:0;" data--5-top-bottom="opacity:1;">
+	<div class="gitber container" id="tagHeading" style="position:fixed; text-align:center;" data-0="margin-top:-50px;" data-anchor-target="#fitHeader" data-50-top-bottom="margin-top:-50px;" data--250-top-bottom="margin-top:0px;">
 				<p>GitBer!</p>
 	</div>
     <div class="container">
 			
             <div class="row-fluid" style="text-align:center;">
-                <p class="gitber" id="fitHeader" data-0="visibility:visible;" data-top-bottom="visibility:hidden;"><span id="gitber1">G</span><span id="gitber2">i</span><span id="gitber3">t</span><span id="gitber4">B</span><span id="gitber5">e</span><span id="gitber6">r</span><span id="gitber7">!</span><span id="gitber8"><i class="icon-github"></i></span></p>
+                <p class="gitber" id="fitHeader"><span id="gitber1">G</span><span id="gitber2">i</span><span id="gitber3">t</span><span id="gitber4">B</span><span id="gitber5">e</span><span id="gitber6">r</span><span id="gitber7">!</span><span id="gitber8"><i class="icon-github"></i></span></p>
             </div>        
             <div class="row-fluid">
                 <div class="span4">
@@ -219,6 +219,31 @@
                             </ul>
                         </div>  
                     </div>
+					
+					<div class="row-fluid" >
+                        <div class="searched white">
+                            <div class="input-append" style="margin-top:15px; padding-left:10px;">
+                                <script type="text/x-handlebars"> 
+                                {{view App.OrganisationSearchTextField placeholder="Organisation Name" valueBinding="App.organisationUserController.organisation" class="span8"}}
+                                <button class="btn btn-info" {{action "loadOrganisation" target="App.organisationUserController"}}>Go!</button>
+                                </script>
+                            </div>
+                            <p style="padding:5px 10px; border-bottom:1px solid #ccc;" class="lead blue">Recent Searches</p>
+                            <ul class="unstyled recentSearches table-striped"> 
+                                 <script type="text/x-handlebars"> 
+                                 {{#each App.organisationUserController}}
+                                    <li> 
+                                        <a href="#" title="view repos" {{action "searchOrgUser" target="App.loadedOrganisationUsersController"}}>{{orgUsername}}</a>
+                                    </li> 
+                                {{/each}} 
+                                </script>
+                            </ul>
+                        </div>  
+                    </div>
+					
+					
+					
+					
                     <div class="row-fluid" style="position:relative;">
                         <div id="userData" class="searched white">
                             <p style="padding:5px 10px; border-bottom:1px solid #ccc;" class="lead blue">User Bio</p>
