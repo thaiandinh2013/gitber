@@ -10,6 +10,7 @@
         <meta name="description" content=""/>
         <meta name="viewport" content="width=device-width"/>
         <link rel="stylesheet" href="styles/main.css"/>
+        <link rel="stylesheet" href="styles/forkit.css"/>
         <link href='http://fonts.googleapis.com/css?family=Keania+One' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,900' rel='stylesheet' type='text/css'>
         <script src="scripts/vendor/jquery.min.js"></script>
@@ -22,6 +23,8 @@
             }
 			body{
 				background: #abbac4;
+                overflow-x:hidden;
+                padding:0px !important;
 			}
             .ribbon{
                 -webkit-transition: margin-top 0.5s;
@@ -135,8 +138,6 @@
 				background:#fff;
 				z-index:500;
 				width:100%;
-				margin-left:-20px !important;
-				padding-right:20px !important;
 			}	
 			.white{
 				background:#fff;
@@ -357,6 +358,25 @@
              </script>
         </div>
     </div>
+
+        <div class="forkit-curtain">
+            <div class="close-button"></div>
+            <div class="container">
+                <div class="row-fluid">
+                    <div class="span3">
+
+                    </div>
+                    <div class="span6">
+                        <h1 class="blue">Information about GitBer goes here</h1>
+                    </div>    
+                </div>   
+            </div>    
+        </div>
+
+        <!-- The ribbon -->
+        <a class="forkit" data-text="About" data-text-detached="Drag down >" href="https://github.com/hakimel/forkit.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/camo.github.com/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub"></a>
+
+        <script src="js/forkit.js"></script>
     <div class="footer gitber" style="position:fixed; bottom:0px; left:0px; background:#fff; height:40px; width:100%; text-align:center;">
 				<p>footer!</p>
 	</div>
@@ -369,6 +389,7 @@
         <!-- build:js scripts/scripts.js -->
         <script src="scripts/vendor/base64.js"></script>
         <script src="scripts/vendor/jquery.fittext.js"></script>
+        <script src="scripts/vendor/forkit.js"></script>
         <script src="scripts/main.js"></script>
         <script src="scripts/vendor/skrollr.min.js"></script>
         <script>
