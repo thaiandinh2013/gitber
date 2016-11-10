@@ -18,7 +18,9 @@ export class UserSearchComponent implements OnInit {
 
     search(term: string): void {
         if(term) {
-            this.searchTerms.push(term);
+            if(this.searchTerms.indexOf(term) < 0) {
+                this.searchTerms.unshift(term);
+            }
             this.setUser(term);
         }
     }
@@ -27,11 +29,19 @@ export class UserSearchComponent implements OnInit {
         this.onSelectedUserChanged.emit(term);
     }
 
+    removeSearchTerm(term: string): void {
+        var index = this.searchTerms.indexOf(term);
+        this.searchTerms.splice(index, 1);
+    }
+
     ngOnInit() { }
 
     ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-        if(changes['selectedUser'] && changes['selectedUser'].currentValue) {
-            this.searchTerms.push(changes['selectedUser'].currentValue.login);
+        var cSelectedUser = changes['selectedUser'];
+        if(cSelectedUser && cSelectedUser.currentValue && cSelectedUser.previousValue != cSelectedUser.currentValue) {
+            if(this.searchTerms.indexOf(cSelectedUser.currentValue.login) < 0) {
+                this.searchTerms.unshift(cSelectedUser.currentValue.login);
+            }
         }
     }
 }

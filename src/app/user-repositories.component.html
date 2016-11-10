@@ -1,6 +1,6 @@
-<div class="row-fluid" style="position:relative;">
-    <div id="userData" class="searched white">
-        <p style="padding:5px 10px; border-bottom:1px solid #ccc;" class="lead blue">User Repositories</p>
+<div class="row-fluid" style="position:relative; margin: 0px">
+    <div id="results" class="white">
+        <p style="padding:5px 10px; border-bottom:1px solid #ccc; margin-bottom: 0px" class="lead blue">User Repositories</p>
         <div *ngIf="selectedUser">
             <div class="row-fluid" *ngFor="let repo of selectedUser.repositories">
                 <div class="repo">
@@ -11,7 +11,7 @@
                             <p><strong>File Size:</strong> {{repo.size}}kb</p>
                             <p><strong>Description:</strong></p>
                             <div class="row-fluid">
-                                <div class="span10">
+                                <div class="col-md-10">
                                     <pre>{{repo.readme}}</pre>
                                 </div>
                             </div>
