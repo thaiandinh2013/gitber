@@ -1,0 +1,52 @@
+<div class="row-fluid" style="position:relative;">
+    <div id="userData" class="searched white">
+        <p style="padding:5px 10px; border-bottom:1px solid #ccc;" class="lead blue">User Bio</p>
+        <div class="row-fluid" *ngIf="selectedUser">
+            <div class="span12" style="padding-left:10px;padding-right:100px;">
+                <p><strong>Name:</strong> {{selectedUser.name}}</p>
+                <p><strong>Username:</strong> {{selectedUser.login}}</p>
+                <p><strong>Company:</strong> {{selectedUser.company}}</p>
+                <p><strong>Repos:</strong> {{selectedUser.public_repos}}</p>
+                <p><strong>Followers:</strong> {{selectedUser.followers}}</p>
+                <p><strong>Joined on:</strong> {{selectedUser.created_at}}</p>
+            </div>
+            <img class="avatar img-polaroid" src={{selectedUser.avatar_url}} />
+        </div>
+        <div class="row-fluid visible-phone phoneButtons" *ngIf="selectedUser">
+            <div class="phone-button">
+                    <a class="btn btn-primary btn-large" href="mailto:{{selectedUser.emai}}" *ngIf="selectedUser.email"><i class="icon-envelope-alt icon-4x"></i></a>
+            </div>
+            <div class="phone-button">
+                    <a class="btn btn-warning btn-large" href="{{selectedUser.blog}}" target="_blank" *ngIf="selectedUser.blog"><i class="icon-comments icon-4x"></i></a>
+            </div>
+            <div class="phone-button">
+                    <a class="btn btn-danger btn-large" href="{{selectedUser.location}}" target="_blank" *ngIf="selectedUser.location"><i class="icon-map-marker icon-4x"></i></a>
+            </div>
+            <div class="phone-button">
+                        <a class="btn btn-inverse btn-large" href="{{selectedUser.blog}}" target="_blank" *ngIf="selectedUser.hireable"><i class="icon-suitcase icon-4x"></i></a>
+            </div>
+        </div>
+        <div class="row-fluid hidden-phone" style="position:absolute; margin-top:10px;overflow:hidden;" *ngIf="selectedUser">
+            <div class="col-md-3" *ngIf="selectedUser.email">
+                <div class="ribbon emailTag" style="position:relative;">
+                    <a href="mailto:{{selectedUser.email}}"><img src="../public/images/small-fork.png"><span class="bioDropdown"><p class="lead" style="color:#fff;">Email</p><i class="icon-envelope-alt icon-2x"></i></span></a>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="selectedUser.blog">
+                <div class="ribbon blogtag" style="position:relative;">
+                    <a href="{{selectedUser.blog}}" target="_blank"><img src="../public/images/small-fork.png"><span class="bioDropdown"><p class="lead" style="color:#fff;">Blog</p><i class="icon-comments icon-2x"></i></span></a>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="selectedUser.location">
+                <div class="ribbon localeTag" style="position:relative;">
+                    <a href="{{selectedUser.location}}" target="_blank"><img src="../public/images/small-fork.png"><span class="bioDropdown"><p class="lead" style="color:#fff;">Locale</p><i class="icon-map-marker icon-2x"></i></span></a>
+                </div>
+            </div>
+            <div class="col-md-3" *ngIf="selectedUser.hireable">
+                <div class="ribbon hireTag" style="position:relative;">
+                    <a href="{{selectedUser.blog}}" target="_blank"><img src="../public/images/small-fork.png"><span class="bioDropdown"><p class="lead"  style="color:#fff;">Hire</p><i class="icon-suitcase icon-2x"></i></span></a>
+                </div>
+            </div>
+        </div>	
+    </div>
+</div>

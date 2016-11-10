@@ -1,0 +1,20 @@
+<div class="row-fluid">
+    <div class="col-md-4">
+        <div>
+            <div class="row-fluid">
+                <user-search (onSelectedUserChanged)="onSelectedUserChanged($event)" [selectedUser]="selectedUser"></user-search>
+            </div>
+            <div class="row-fluid">
+                <organization-search (onSelectedUserChanged)="onSelectedUserChanged($event)"></organization-search>
+            </div>
+            <div class="row-fluid">
+                <user-biography (onSelectedUserChanged)="onSelectedUserChanged($event)" [selectedUser]="selectedUser"></user-biography>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="row-fluid">
+            <user-repositories (onSelectedUserChanged)="onSelectedUserChanged($event)" [selectedUser]="selectedUser"></user-repositories>
+        </div>
+    </div>
+</div>

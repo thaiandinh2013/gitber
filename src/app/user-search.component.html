@@ -1,0 +1,15 @@
+<div class="searched white">
+    <div class="input-group" style="margin: 10px">
+      <input #userSearchInput type="text" class="form-control" placeholder="Github username">
+      <span class="input-group-btn">
+        <button class="btn btn-info" type="button" (click)="search(userSearchInput.value)">Go!</button>
+      </span>
+    </div>
+    <p style="padding:5px 10px; border-bottom:1px solid #ccc;" class="lead blue">Recent Searches</p>
+    <ul class="unstyled recentSearches table-striped">
+        <li *ngFor="let term of searchTerms">
+            <a href="#" (click)="setUser(term)" title="view again">{{term}}</a>
+            <a class="btn btn-info btn-mini pull-right" href="#" title="remove">X</a>
+        </li>
+    </ul>
+</div>

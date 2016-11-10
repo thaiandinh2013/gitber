@@ -1,0 +1,15 @@
+<div class="searched white">
+    <div class="input-group" style="margin: 10px">
+      <input #organisationSearchInput type="text" class="form-control" placeholder="Organisation name">
+      <span class="input-group-btn">
+        <button class="btn btn-info" type="button" (click)="search(organisationSearchInput.value)">Go!</button>
+      </span>
+    </div>
+    <p style="padding:5px 10px; border-bottom:1px solid #ccc;" class="lead blue">Organisation Members</p>
+    <ul class="unstyled recentSearches table-striped" *ngIf="users">
+        <li *ngFor="let user of users">
+            <a href="#" title="view again" (click)="selectUser(user.login)">{{user.login}}</a>
+            <a class="btn btn-info btn-mini pull-right" href="#" title="remove">X</a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,29 @@
+<div class="row-fluid" style="position:relative;">
+    <div id="userData" class="searched white">
+        <p style="padding:5px 10px; border-bottom:1px solid #ccc;" class="lead blue">User Repositories</p>
+        <div *ngIf="selectedUser">
+            <div class="row-fluid" *ngFor="let repo of selectedUser.repositories">
+                <div class="repo">
+                    <div class="span12 repoDetails">
+                        <blockquote>
+                            <h3 class="blue" style="margin-bottom:0px;"><a target="_blank" href="{{repo.html_url}}">{{repo.name}}</a></h3>
+                            <p><strong>Language:</strong> {{repo.language}}</p>
+                            <p><strong>File Size:</strong> {{repo.size}}kb</p>
+                            <p><strong>Description:</strong></p>
+                            <div class="row-fluid">
+                                <div class="span10">
+                                    <pre>{{repo.readme}}</pre>
+                                </div>
+                            </div>
+
+                            <small>Created on {{repo.created_at}}</small>
+                            <div class="ribbonWrapper" style="overflow:hidden;">
+                                <a target="_blank" href="{{repo.html_url}}"><img class="ribbon" src="../public/images/fork.png" alt="Fork me on GitHub"></a>
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
